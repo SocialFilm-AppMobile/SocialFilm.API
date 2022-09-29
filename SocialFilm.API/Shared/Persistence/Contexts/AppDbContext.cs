@@ -1,8 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using SocialFilm.API.Shared.Domain.Model;
+using SocialFilm.API.Security.Domain.Models;
 using SocialFilm.API.Watching.Domain.Models;
 
-namespace SocialFilm.API.Watching.Persistence.Contexts;
+namespace SocialFilm.API.Shared.Persistence.Contexts;
 
 public class AppDbContext:DbContext
 {
@@ -14,6 +14,8 @@ public class AppDbContext:DbContext
     public DbSet<Season> Seasons { get; set; }
     public DbSet<Episode> Episodes { get; set; }
     
+    public DbSet<User> Users { get; set; }
+    
     //Not implemented Yet
     //public DbSet<User> Users { get; set; }
     
@@ -24,6 +26,14 @@ public class AppDbContext:DbContext
     protected override void OnModelCreating(ModelBuilder builder)
     {
         base.OnModelCreating(builder);
+        //USERS
+        //Constraints
+        builder.Entity<User>().ToTable("Users");
+        builder.Entity<User>().HasKey(p=>p.Id);
+        builder.Entity<User>().Property(p=>p.Id).IsRequired().ValueGeneratedOnAdd();
+        builder.Entity<User>().Property(p=>p.FirstName).IsRequired();
+        builder.Entity<User>().Property(p=>p.LastName).IsRequired();
+        builder.Entity<User>().Property(p=>p.Email).IsRequired().HasMaxLength(30);
         
         //VIDEO MODEL
         builder.Entity<Video>().ToTable("Videos");

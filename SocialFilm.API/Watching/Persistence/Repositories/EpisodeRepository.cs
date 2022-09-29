@@ -1,7 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using SocialFilm.API.Shared.Persistence.Contexts;
+using SocialFilm.API.Shared.Persistence.Repositories;
 using SocialFilm.API.Watching.Domain.Models;
 using SocialFilm.API.Watching.Domain.Repositories;
-using SocialFilm.API.Watching.Persistence.Contexts;
 
 namespace SocialFilm.API.Watching.Persistence.Repositories;
 

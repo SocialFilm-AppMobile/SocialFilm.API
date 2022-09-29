@@ -1,6 +1,6 @@
-﻿using SocialFilm.API.Watching.Persistence.Contexts;
+﻿using SocialFilm.API.Shared.Persistence.Contexts;
 
-namespace SocialFilm.API.Watching.Persistence.Repositories;
+namespace SocialFilm.API.Shared.Persistence.Repositories;
 
 public class BaseRepository
 {

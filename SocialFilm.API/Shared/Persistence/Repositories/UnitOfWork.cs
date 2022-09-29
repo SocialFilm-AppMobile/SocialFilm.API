@@ -1,7 +1,8 @@
-﻿using SocialFilm.API.Watching.Domain.Repositories;
-using SocialFilm.API.Watching.Persistence.Contexts;
+﻿using SocialFilm.API.Shared.Domain.Repositories;
+using SocialFilm.API.Shared.Persistence.Contexts;
+using SocialFilm.API.Watching.Domain.Repositories;
 
-namespace SocialFilm.API.Watching.Persistence.Repositories;
+namespace SocialFilm.API.Shared.Persistence.Repositories;
 
 public class UnitOfWork:IUnitOfWork
 {

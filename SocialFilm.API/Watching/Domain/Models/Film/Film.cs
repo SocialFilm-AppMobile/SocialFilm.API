@@ -1,6 +1,4 @@
-﻿using SocialFilm.API.Shared.Domain.Model;
-
-namespace SocialFilm.API.Watching.Domain.Models;
+﻿namespace SocialFilm.API.Watching.Domain.Models;
 
 public class Film
 {

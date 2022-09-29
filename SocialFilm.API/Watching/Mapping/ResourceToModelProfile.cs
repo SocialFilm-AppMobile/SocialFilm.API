@@ -1,5 +1,4 @@
 ﻿using AutoMapper;
-using SocialFilm.API.Shared.Domain.Model;
 using SocialFilm.API.Watching.Domain.Models;
 using SocialFilm.API.Watching.Resources;
 

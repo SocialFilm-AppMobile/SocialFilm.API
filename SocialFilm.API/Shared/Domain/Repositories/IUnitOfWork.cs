@@ -1,4 +1,4 @@
-﻿namespace SocialFilm.API.Watching.Domain.Repositories;
+﻿namespace SocialFilm.API.Shared.Domain.Repositories;
 
 public interface IUnitOfWork
 {

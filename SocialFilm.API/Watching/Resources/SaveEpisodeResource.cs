@@ -1,4 +1,4 @@
-﻿using SocialFilm.API.Shared.Domain.Model;
+﻿using SocialFilm.API.Watching.Domain.Models;
 
 namespace SocialFilm.API.Watching.Resources;
 

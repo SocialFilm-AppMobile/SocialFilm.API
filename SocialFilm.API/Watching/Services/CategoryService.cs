@@ -1,4 +1,5 @@
-﻿using SocialFilm.API.Watching.Domain.Models;
+﻿using SocialFilm.API.Shared.Domain.Repositories;
+using SocialFilm.API.Watching.Domain.Models;
 using SocialFilm.API.Watching.Domain.Repositories;
 using SocialFilm.API.Watching.Domain.Services;
 using SocialFilm.API.Watching.Domain.Services.Communication;

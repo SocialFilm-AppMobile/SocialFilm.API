@@ -1,5 +1,5 @@
-﻿using SocialFilm.API.Shared.Domain.Model;
-using SocialFilm.API.Shared.Domain.Services.Comunication;
+﻿using SocialFilm.API.Shared.Domain.Services.Comunication;
+using SocialFilm.API.Watching.Domain.Models;
 
 namespace SocialFilm.API.Watching.Domain.Services.Communication;
 
