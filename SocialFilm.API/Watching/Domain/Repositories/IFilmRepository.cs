@@ -9,6 +9,7 @@ public interface IFilmRepository
     Task<Film> FindByIdAsync(int filmId);
     Task<Film> FindByTitleAsync(string title);
     Task<IEnumerable<Film>> FindByCategoryIdAsync(int categoryId);
+    Task<IEnumerable<Film>> FindByUserIdAsync(int userId);
     void Update(Film film);
     void Remove(Film film);
 }

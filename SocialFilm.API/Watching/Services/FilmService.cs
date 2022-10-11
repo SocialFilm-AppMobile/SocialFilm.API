@@ -11,19 +11,25 @@ public class FilmService:IFilmService
     private readonly IFilmRepository _filmRepository;
     private readonly IUnitOfWork _unitOfWork;
     private readonly ICategoryRepository _categoryRepository;
-    private readonly IVideoRepository _videoRepository;
+    private readonly IBannerVideoRepository _bannerVideoRepository;
+    
 
-    public FilmService(IFilmRepository filmRepository, IUnitOfWork unitOfWork, ICategoryRepository categoryRepository, IVideoRepository videoRepository)
+    public FilmService(IFilmRepository filmRepository, IUnitOfWork unitOfWork, ICategoryRepository categoryRepository, IBannerVideoRepository bannerVideoRepository)
     {
         _filmRepository = filmRepository;
         _unitOfWork = unitOfWork;
         _categoryRepository = categoryRepository;
-        _videoRepository = videoRepository;
+        _bannerVideoRepository = bannerVideoRepository;
     }
 
     public async Task<IEnumerable<Film>> ListAsync()
     {
         return await _filmRepository.ListAsync();
+    }
+
+    public async Task<IEnumerable<Film>> ListByUserIdAsync(int userId)
+    {
+        return await _filmRepository.FindByUserIdAsync(userId);
     }
 
     public async Task<FilmResponse> GetAsync(int filmId)
@@ -40,7 +46,7 @@ public class FilmService:IFilmService
         }
         catch (Exception e)
         {
-            return new FilmResponse($"An error occurred while deleting the film: {e.Message}");
+            return new FilmResponse($"An error occurred while geting the film: {e.Message}");
         }
     }
 
@@ -77,6 +83,9 @@ public class FilmService:IFilmService
     public async Task<FilmResponse> UpdateAsync(int filmId, Film film)
     {
         var existingFilm = await _filmRepository.FindByIdAsync(filmId);
+
+        var existingBanner = await _bannerVideoRepository.FindByFilmIdAsync(filmId);
+        
         if (existingFilm == null)
             return new FilmResponse("Film not found.");
         
@@ -84,9 +93,7 @@ public class FilmService:IFilmService
         if (existingCategory == null)
             return new FilmResponse("Invalid Category");
         
-        var existingVideo = await _videoRepository.FindByIdAsync(existingFilm.Video.Id);
-        if (existingVideo == null)
-            return new FilmResponse("Invalid Video");
+
         
         var existingFilmWithTitle = await _filmRepository.FindByTitleAsync(film.Title);
         
@@ -95,13 +102,19 @@ public class FilmService:IFilmService
         
         existingFilm.Title = film.Title;
         existingFilm.Synopsis = film.Synopsis;
-        existingFilm.Video.VideoUrl = film.Video.VideoUrl;
+        existingFilm.VideoURL = film.VideoURL;
+        existingFilm.UserId = film.UserId;
+       
         existingFilm.CategoryId= film.CategoryId;
-        existingFilm.BannerVideo = film.BannerVideo;
-        
+
+        existingBanner.Billboard = film.BannerVideo.Billboard;
+        existingBanner.Banner = film.BannerVideo.Banner;
+
         try
         {
+            _bannerVideoRepository.Update(existingBanner);
             _filmRepository.Update(existingFilm);
+            
             await _unitOfWork.CompleteAsync();
             
             return new FilmResponse(existingFilm);

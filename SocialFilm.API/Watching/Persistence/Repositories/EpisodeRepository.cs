@@ -15,7 +15,7 @@ public class EpisodeRepository:BaseRepository,IEpisodeRepository
     public async Task<IEnumerable<Episode>> ListAsync()
     {
         return await _context.Episodes
-            .Include(p => p.Video)
+            
             .Include(p => p.Season)
             .ToListAsync();
     }
@@ -28,7 +28,7 @@ public class EpisodeRepository:BaseRepository,IEpisodeRepository
     public async Task<Episode> FindByIdAsync(int episodeId)
     {
         return await _context.Episodes
-            .Include(p => p.Video)
+           
             .Include(p => p.Season)
             .FirstOrDefaultAsync(p => p.Id == episodeId);
     }
@@ -36,7 +36,7 @@ public class EpisodeRepository:BaseRepository,IEpisodeRepository
     public async Task<Episode> FindByTitleAsync(string title)
     {
         return await _context.Episodes
-            .Include(p => p.Video)
+            
             .Include(p => p.Season)
             .FirstOrDefaultAsync(p => p.Title == title);
     }
@@ -45,7 +45,7 @@ public class EpisodeRepository:BaseRepository,IEpisodeRepository
     {
         return await _context.Episodes
             .Include(p => p.Season)
-            .Include(p => p.Video)
+            
             .Where(p => p.SeasonId == seasonId)
             .ToListAsync();
     }

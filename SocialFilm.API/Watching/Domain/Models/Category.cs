@@ -6,6 +6,6 @@ public class Category
     public string Name { get; set; }
     
     // Relationships
-    public IList<Film> Films { get; set; } = new List<Film>();
-    public IList<Serie> Series { get; set; } = new List<Serie>();
+    public IList<Film> Films { get; set; }
+    public IList<Serie> Series { get; set; }
 }

@@ -12,14 +12,14 @@ public class EpisodeService:IEpisodeService
     private readonly IEpisodeRepository _episodeRepository;
     private readonly IUnitOfWork _unitOfWork;
     private readonly ISeasonRepository _seasonRepository;
-    private readonly IVideoRepository _videoRepository;
+    
 
-    public EpisodeService(IEpisodeRepository episodeRepository, IUnitOfWork unitOfWork, ISeasonRepository seasonRepository, IVideoRepository videoRepository)
+    public EpisodeService(IEpisodeRepository episodeRepository, IUnitOfWork unitOfWork, ISeasonRepository seasonRepository)
     {
         _episodeRepository = episodeRepository;
         _unitOfWork = unitOfWork;
         _seasonRepository = seasonRepository;
-        _videoRepository = videoRepository;
+        
     }
 
     public async Task<IEnumerable<Episode>> ListAsync()
@@ -94,10 +94,7 @@ public class EpisodeService:IEpisodeService
         if (existingSeason == null)
             return new EpisodeResponse("Invalid Season");
         
-        var existingVideo = await _videoRepository.FindByIdAsync(episode.VideoId);
-        
-        if (existingVideo == null)
-            return new EpisodeResponse("Invalid Video");
+ 
         
         var existingEpisodeWithTitle = await _episodeRepository.FindByTitleAsync(episode.Title);
         
@@ -106,7 +103,7 @@ public class EpisodeService:IEpisodeService
 
         existingEpisode.Title = episode.Title;
         existingEpisode.Synopsis = episode.Synopsis;
-        existingEpisode.Video.VideoUrl = episode.Video.VideoUrl;
+
         existingEpisode.Season = episode.Season;
 
         try
@@ -142,7 +139,8 @@ public class EpisodeService:IEpisodeService
 
         existingEpisode.Title = episode.Title;
         existingEpisode.Synopsis = episode.Synopsis;
-        existingEpisode.Video.VideoUrl = episode.Video.VideoUrl;
+        existingEpisode.VideoUrl = episode.VideoUrl;
+
         existingEpisode.SeasonId = seasonId;
 
         try

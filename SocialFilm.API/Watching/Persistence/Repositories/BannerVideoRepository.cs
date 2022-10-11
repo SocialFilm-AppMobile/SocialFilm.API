@@ -27,6 +27,14 @@ public class BannerVideoRepository:BaseRepository,IBannerVideoRepository
         return await _context.BannerVideos.FindAsync(bannerVideoId);
     }
 
+    public async Task<BannerVideo> FindByFilmIdAsync(int filmId)
+    {
+        return await _context.BannerVideos
+            .Where(p => p.FilmId == filmId)
+            .Include(p => p.Film)
+            .FirstOrDefaultAsync(p => p.FilmId == filmId);
+    }
+
     public void Update(BannerVideo bannerVideo)
     {
         _context.BannerVideos.Update(bannerVideo);

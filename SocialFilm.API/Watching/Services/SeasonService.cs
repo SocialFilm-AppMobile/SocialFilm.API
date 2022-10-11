@@ -96,16 +96,7 @@ public class SeasonService:ISeasonService
 
         if (existingSerie == null)
             return new SeasonResponse("Invalid Serie");
-
-        var existingEpisode = await _episodeRepository.FindByIdAsync(season.EpisodeId);
-
-        if (existingEpisode == null)
-            return new SeasonResponse("Invalid Episode");
-
-        existingSeason.Title = season.Title;
-        existingSeason.Synopsis = season.Synopsis;
-        existingSeason.Serie = season.Serie;
-        existingSeason.Episodes = season.Episodes;
+        
 
         try
         {

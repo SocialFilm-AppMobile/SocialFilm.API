@@ -6,13 +6,13 @@ public class Episode
     public string Title { get; set; }
     public string Synopsis { get; set; }
     
+    public string VideoUrl { get; set; }
+
     //Relationship
     
     public int SeasonId { get; set; }
     public Season Season { get; set; }
-    public int VideoId { get; set; }
-    public Video Video { get; set; }
     
-    //Likes Relationship
-    //Qualification Relationship
+    
+    
 }
